@@ -8,7 +8,7 @@ const fs = require("fs");
 const app = express();
 app.use(
   cors({
-    origin: "https://downloader-frontend.vercel.app/",
+    origin: "https://downloader-frontend.vercel.app",
     exposedHeaders: [
       "x-video-title",
       "x-video-uploader",
@@ -26,7 +26,7 @@ app.post("/api/download", (req, res) => {
   const outputFile = `video_${Date.now()}.mp4`;
 
   // First get metadata
-  exec(`${ytDlpPath} --dump-json ${videoUrl}`, (infoErr, stdout) => {
+  exec(`./yt-dlp --dump-json ${videoUrl}`, (infoErr, stdout) => {
     if (infoErr) {
       console.error("Metadata error:", infoErr);
       return res.status(500).send("Failed to fetch video info");
