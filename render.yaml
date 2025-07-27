@@ -1,11 +1,12 @@
 services:
   - type: web
-    name: yt-dlp-api
-    runtime: node
-    repo: https://github.com/ayanmirza99/downloader-backend
+    name: video-downloader-backend
+    env: node
     plan: free
-    buildCommand: "npm install"
-    startCommand: "node server.js"
+    buildCommand: |
+      chmod +x yt-dlp
+      npm install
+    startCommand: node server.js
     envVars:
-      - key: NODE_ENV
-        value: production
+      - key: PORT
+        value: 5000
